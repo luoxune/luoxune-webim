@@ -141,7 +141,7 @@
                     }],
 
                     brief:false,
-                    title:'骆寻',
+                    title:'骆寻IM',
                     chatTitleColor:'#36373C',
                     isNewFriend:true,
                     tabIndex:0,

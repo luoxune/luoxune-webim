@@ -19,8 +19,8 @@ class OSS {
     // 经典网络 or VPC
     private $networkType = '经典网络';
 
-    private $AccessKeyId = 'LTAI4G5okT2N8WwNS2JQBRNi';
-    private $AccessKeySecret = 'Vayzp8MpFNSkEEjlnipEaxjL1NXac2';
+    private $AccessKeyId = '';
+    private $AccessKeySecret = '';
 
 
     private $ossClient;
@@ -31,6 +31,11 @@ class OSS {
      */
     public function __construct($isInternal = false)
     {
+        
+        $this-> city = config('aliyunoss.City');
+        $this-> networkType = config('aliyunoss.NetworkType');
+        $this-> AccessKeyId = config('aliyunoss.AccessKeyId');
+        $this-> AccessKeySecret = config('aliyunoss.AccessKeySecret');
         if ($this->networkType == 'VPC' && !$isInternal) {
             throw new Exception("VPC 网络下不提供外网上传、下载等功能");
         }
