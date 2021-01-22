@@ -1,0 +1,318 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>NZ_Menu示例页面</title>
+    <script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+    <link href="CSS/displaystyle.css?v=1.5.0" rel="stylesheet" />
+    <script src="JS/syntaxhighlighter_3.0.83/shCore.js"></script>
+    <script src="JS/syntaxhighlighter_3.0.83/shBrushJScript.js"></script>
+    <link href="JS/syntaxhighlighter_3.0.83/styles/shCoreRDark.css" rel="stylesheet" />
+    <script src="JS/NZ-Plugin/Js/NZ-Menu.min.js"></script>
+    <link href="JS/NZ-Plugin/Css/NZ-Menu.min.css" rel="stylesheet" />
+    <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.min.css" rel="stylesheet" />
+    <script>
+        SyntaxHighlighter.all();
+        $(function () {
+            $("#aaa").NZ_Menu({
+                items: [{
+                    name: "复制", event: aas
+                }, {
+                    name: "粘贴", event: function () {
+                        alert("粘贴");
+                    }
+                }, {
+                    name: "替换"
+                    , event: function () { alert("替换"); }
+                }, {
+                    name: "测试", event: function () {
+                        alert("测试");
+                    }
+                }, {
+                    name: "This item is Test", event: function () {
+                    }
+                }
+                ]
+            });
+            $("#bbb").NZ_Menu({
+                items: [{
+                    name: "用户", icon: "fa-user"
+                }, {
+                    name: "通讯录", event: function () {
+                    }, icon: "fa-address-book"
+                }, {
+                    name: "打车平台", event: function () {
+                    }, icon: "fa-bus"
+                }, {
+                    name: "文件系统", event: function () {
+                    }, icon: "fa-file"
+                }]
+            });
+            $("#ccc").NZ_Menu({
+                items: [{ name: "测试", icon: "fa-vial" }]
+                , showbefore: function () {
+                    alert("打开前！");
+                }, showafter: function () {
+                    alert("打开后！");
+                }, closed: function () {
+                    alert("关闭了！");
+                }
+            });
+            $("#ddd").NZ_Menu({
+                items: [{
+                    name: "复制"
+                    , icon: "fa-copy"
+                }, {
+                    name: "粘贴"
+                    , icon: "fa-paste"
+                }, {
+                    name: "添加"
+                    , icon: "fa-plus"
+                    , event: function () { alert("替换"); }
+                    , menu: [
+                        {
+                            name: "文件夹",
+                            event: function () {
+                                alert("这是文件夹");
+                            }
+                        },
+                        {
+                            name: "Execl"
+                        },
+                        {
+                            name: "记事本"
+                        }
+                    ]
+                }, {
+                    name: "刷新"
+                    , icon: "fa-redo-alt"
+                }, {
+                    name: "下载"
+                    , icon: "fa-download"
+                    , event: function () { }
+                    , menu: [
+                        { name: "黄金圣斗士" }, { name: "迪迦奥特曼" }, { name: "天线宝宝" }
+                    ]
+                }, {
+                    name: "通讯录", event: function () {
+                    }, icon: "fa-address-book"
+                }
+                ]
+            });
+            $("#eee").NZ_Menu({
+                items: [{
+                    name: "复制-图片图标"
+                    , imgicon: "images/icon/copy.png"
+                }, {
+                    name: "粘贴"
+                    , icon: "fa-paste"
+                }, {
+                    name: "刷新-图片图标"
+                    , imgicon: "images/icon/refresh.png"
+                }, {
+                    name: "下载-图片图标"
+                    , imgicon: "images/icon/download.png"
+                    , event: function () { }
+                    , menu: [
+                        { name: "黄金圣斗士" }, { name: "迪迦奥特曼" }, { name: "天线宝宝" }
+                    ]
+                }, {
+                    name: "通讯录", event: function () {
+                    }, icon: "fa-address-book"
+                }
+                ]
+            });
+        });
+        function aas() {
+            alert("复制");
+        }
+    </script>
+    <style>
+        .demo-panel {
+            width: 300px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+            background-color: rgba(0,150,136,.5);
+        }
+    </style>
+</head>
+<body>
+    <h2 class="pagetitle">NZ-Menu</h2>
+    <ul class="conlist">
+        <li>
+            <div class="contitle">基本应用</div>
+            <ul>
+                <li>
+                    <h3>使用方法</h3>
+                    <div class="demo-panel" id="aaa">右击点我</div>
+                    <h5>演示代码：</h5>
+                    <pre class="brush:js">
+                        $("#aaa").NZ_Menu({
+                                items: [{
+                                    name: "复制", event: aas
+                                }, {
+                                name: "粘贴", event: function () {
+                                    alert("粘贴");
+                                }
+                                }, {
+                                    name: "粘贴", event: function () {
+                                        alert("粘贴");
+                                    }
+                                }, {
+                                    name: "粘贴", event: function () {
+                                        alert("粘贴");
+                                }, {
+                                    name: "This item is Test", event: function () {
+                                }
+                                }
+                            }]
+                        });
+                        function aas() {
+                            alert("复制");
+                        }
+                    </pre>
+                </li>
+                <li>
+                    <h3>带图标</h3>
+                    <div class="demo-panel" id="bbb">右击点我</div>
+                    <h5>演示代码：</h5>
+                    <pre class="brush:js">
+                        $("#bbb").NZ_Menu({
+                            items: [{
+                                name: "用户", event: aas, icon: "fa-user"
+                            }, {
+                                name: "通讯录", event: function () {
+                                }, icon: "fa-address-book"
+                            }, {
+                                name: "打车平台", event: function () {
+                                }, icon: "fa-bus"
+                            }, {
+                                name: "文件系统", event: function () {
+                                }, icon: "fa-file"
+                            }]
+                        });
+                    </pre>
+                </li>
+                <li>
+                    <h3>触发事件</h3>
+                    <div class="demo-panel" id="ccc">右击点我</div>
+                    <h5>演示代码：</h5>
+                    <pre class="brush:js">
+                        $("#bbb").NZ_Menu({
+                            items: [{
+                                name: "用户", event: aas, icon: "fa-user"
+                            }, {
+                                name: "通讯录", event: function () {
+                                }, icon: "fa-address-book"
+                            }, {
+                                name: "打车平台", event: function () {
+                                }, icon: "fa-bus"
+                            }, {
+                                name: "文件系统", event: function () {
+                                }, icon: "fa-file"
+                            }]
+                        });
+                    </pre>
+                </li>
+                <li>
+                    <h3>二级菜单（新版本2.8.0）</h3>
+                    <div class="demo-panel" id="ddd">右击点我</div>
+                    <div class="descript">注：虽命名是二级菜单，实际理论上支持无级菜单，即多级菜单，可自行测试。</div>
+                    <h5>演示代码：</h5>
+                    <pre class="brush:js">
+                        $("#ddd").NZ_Menu({
+                            items: [{
+                                name: "复制"
+                                , icon: "fa-copy"
+                            }, {
+                                name: "粘贴"
+                                , icon: "fa-paste"
+                            }, {
+                                name: "添加"
+                                , icon: "fa-plus"
+                                , event: function () { alert("替换"); }
+                                , menu: [
+                                    {
+                                        name: "文件夹",
+                                        event: function () {
+                                            alert("这是文件夹");
+                                        }
+                                    },
+                                    {
+                                        name: "Execl"
+                                    },
+                                    {
+                                        name: "记事本"
+                                    }
+                                ]
+                            }, {
+                                name: "刷新"
+                                , icon: "fa-redo-alt"
+                            }, {
+                                name: "下载"
+                                , icon: "fa-download"
+                                , event: function () { }
+                                , menu: [
+                                    { name: "黄金圣斗士" }, { name: "迪迦奥特曼" }, { name: "天线宝宝" }
+                                ]
+                            }, {
+                                name: "通讯录", event: function () {
+                                }, icon: "fa-address-book"
+                            }
+                            ]
+                        });
+                    </pre>
+                </li>
+                <li>
+                    <h3>自定义图片图标（新版本2.8.0）</h3>
+                    <div class="demo-panel" id="eee">右击点我</div>
+                    <h5>演示代码：</h5>
+                    <pre class="brush:js">
+                        $("#eee").NZ_Menu({
+                            items: [{
+                                name: "复制-图片图标"
+                                , imgicon: "../../images/icon/copy.png"
+                            }, {
+                                name: "粘贴"
+                                , icon: "fa-paste"
+                            }, {
+                                name: "刷新-图片图标"
+                                , imgicon: "../../images/icon/refresh.png"
+                            }, {
+                                name: "下载-图片图标"
+                                , imgicon: "../../images/icon/download.png"
+                                , event: function () { }
+                                , menu: [
+                                    { name: "黄金圣斗士" }, { name: "迪迦奥特曼" }, { name: "天线宝宝" }
+                                ]
+                            }, {
+                                name: "通讯录", event: function () {
+                                }, icon: "fa-address-book"
+                            }
+                            ]
+                        });
+                    </pre>
+                </li>
+                <li>
+                    <h3>参数说明</h3>
+                    <h5>演示代码：</h5>
+                    <pre class="brush:js">
+                        {
+                            items: [],//选项构成：{icon:"",name:"",menu:[{icon:"",name:"",classlist:[],event:function(){}}],classlist:[],event:function() {}}
+                            fatype: "fas",//fontawesome的图标类型fas/far
+                            bgcolor: "#fff",
+                            showbefore: null,//菜单创建前事件
+                            showafter: null//菜单创建后事件
+                        };
+                    </pre>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</body>
+
+</html>

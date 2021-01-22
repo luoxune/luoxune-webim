@@ -1,0 +1,33 @@
+.layui-layout .layui-header {
+    background-color: #393D49;
+}
+.layui-layout .layui-logo {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 200px;
+    height: 100%;
+    line-height: 60px;
+    text-align: center;
+    color: #009688;
+    font-size: 16px;
+}
+.fly-footer {margin: 50px 0 0; padding: 20px 0; line-height: 30px; text-align: center; color: #737573; border-top: 1px solid #e2e2e2;}
+.fly-footer a{padding:0 6px; font-weight: 300; color: #333;}
+.fly-footer a:hover{color: #777;}
+.fly-union{color: #999;}
+.fly-union>*{display: inline-block; vertical-align: middle;}
+.fly-union a[sponsor] img{width: 80px;}
+.fly-union span{position: relative; top: 5px;}
+.fly-union span a{padding: 0; display: inline; color: #999;}
+.fly-union span a:hover{text-decoration: underline;}
+
+.L-show{
+    display: block !important;
+}
+
+.layui-upload-img {
+    width: 92px;
+    height: 92px;
+    margin: 0 10px 10px 0;
+}
