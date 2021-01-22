@@ -60,6 +60,10 @@
     var friendID = null ;//用来存放要右键菜单操作的元素ID(朋友);
     var groupName = null;//用来存放要右键菜单操作的元素ID(分组);
     var chatGroupID = null;//用来存放要右键菜单操作的元素ID(群组);
+    
+    var websocket_connected_count = 0;
+    var onclose_connected_count = 0;
+    var websocket = null;
     layui.use('layim', function(layim){
         $.ajaxSetup({
             headers: {
@@ -113,12 +117,59 @@
             ,find: find_user_url //发现页面地址，若不开启，剔除该项即可
             ,chatLog: chatlogs_view_url //聊天记录页面地址，若不开启，剔除该项即可
         });
-        socket = new WebSocket('wss://'+domain);
-        socket.onopen = function(){
+                var ws_url ='wss://'+domain;
+        // 判断当前环境是否支持websocket
+        if(window.WebSocket){
+            if(!websocket){
+                websocket = new WebSocket(ws_url);
+            }
+        }else{
+            layer.msg("not support websocket");
+        }
+
+        // 连接成功建立的回调方法
+        websocket.onopen = function(e){
+            heartCheck.reset().start();   // 成功建立连接后，重置心跳检测
             console.log("websocket握手成功!");
-        };
+        }
+        // 连接发生错误，连接错误时会继续尝试发起连接（尝试5次）
+        websocket.onerror = function() {
+            layer.msg("onerror连接发生错误")
+            websocket_connected_count++;
+        }
+        // 接受到服务端关闭连接时的回调方法
+        websocket.onclose = function(){
+            layer.msg("onclose断开连接");
+        }
+        // 监听窗口事件，当窗口关闭时，主动断开websocket连接，防止连接没断开就关闭窗口，server端报错
+        window.onbeforeunload = function(){
+            websocket.close();
+        }
+
+        // 心跳检测, 每隔一段时间检测连接状态，如果处于连接中，就向server端主动发送消息，来重置server端与客户端的最大连接时间，如果已经断开了，发起重连。
+        var heartCheck = {
+            timeout: 30000,        // 30s发一次心跳，比server端设置的连接时间稍微小一点，在接近断开的情况下以通信的方式去重置连接时间。
+            serverTimeoutObj: null,
+            reset: function(){
+                clearTimeout(this.serverTimeoutObj);
+                return this;
+            },
+            start: function(){
+                var self = this;
+                this.serverTimeoutObj = setInterval(function(){
+                    if(websocket.readyState === 1){
+                        console.log("连接状态，发送消息保持连接");
+                        websocket.send("ping");
+                        heartCheck.reset().start();    // 如果获取到消息，说明连接是正常的，重置心跳检测
+                    }else{
+                        console.log("断开状态，尝试重连");
+                        websocket = new WebSocket(ws_url);
+                    }
+                }, this.timeout)
+            }
+        }
         //监听收到的消息
-        socket.onmessage = function(e) {
+        websocket.onmessage = function(e) {
             var data = JSON.parse(e.data),
                 type = data.type || '',
                 message = data.data || '';

@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 
 class GroupsController extends Controller
 {
+
     public function store(GroupRequest $request)
     {
         $user = $request->user();

@@ -9,12 +9,12 @@ use App\Http\Controllers\Controller as BaseController;
 
 class Controller extends BaseController
 {
+    //
     public function __construct()
     {
         Gateway::$registerAddress = '127.0.0.1:1314';
 
     }
-    //
     public function sendMessage($uid)
     {
         $user_client_id = Gateway::getClientIdByUid($uid);

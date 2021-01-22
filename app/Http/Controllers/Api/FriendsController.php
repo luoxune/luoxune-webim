@@ -14,7 +14,6 @@ use Illuminate\Http\Request;
 
 class FriendsController extends Controller
 {
-
     public function addFriend(FriendRequest $request)
     {
         $user = $request->user();

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Models\Message;
 use App\Models\Record;
@@ -10,11 +9,10 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Services\OSS;
-
+use GatewayClient\Gateway;
 class AppController extends Controller
 {
     //
-
     public function list(Request $request)
     {
         $user = $request->user();
