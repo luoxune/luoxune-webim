@@ -107,7 +107,7 @@ class ImageUploadHandler
             return false;
         }
         return [
-            'path' =>OSS::getPublicObjectURL(env('ALIOSS_BUCKET'),$image_name),
+            'path' =>env('ALIOSS_URL').'/'.$image_name,
         ];
     }
 }
